@@ -7,8 +7,7 @@ import { api } from "../../../convex/_generated/api";
 import { getGuestId } from "@/lib/guest";
 import { appPath } from "@/lib/paths";
 import Link from "next/link";
-import { ConvexBanner } from "@/components/ConvexBanner";
-import { isConvexConfigured } from "@/lib/convex";
+import { RequiresConvex } from "@/components/RequiresConvex";
 
 function JoinForm() {
   const searchParams = useSearchParams();
@@ -23,10 +22,6 @@ function JoinForm() {
     e.preventDefault();
     if (!token) {
       setError("Missing invite token");
-      return;
-    }
-    if (!isConvexConfigured()) {
-      setError("Convex not configured");
       return;
     }
     setLoading(true);
@@ -48,7 +43,6 @@ function JoinForm() {
   return (
     <main className="container">
       <h1 style={{ margin: "1.5rem 0 0.5rem" }}>Join plan</h1>
-      <ConvexBanner />
       <form onSubmit={handleSubmit}>
         <label className="label">Your name</label>
         <input
@@ -72,7 +66,9 @@ function JoinForm() {
 export default function JoinPage() {
   return (
     <Suspense fallback={<main className="container">Loading…</main>}>
-      <JoinForm />
+      <RequiresConvex>
+        <JoinForm />
+      </RequiresConvex>
     </Suspense>
   );
 }

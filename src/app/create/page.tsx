@@ -7,7 +7,7 @@ import { api } from "../../../convex/_generated/api";
 import { getGuestId } from "@/lib/guest";
 import { appPath } from "@/lib/paths";
 import { ConvexBanner } from "@/components/ConvexBanner";
-import { isConvexConfigured } from "@/lib/convex";
+import { RequiresConvex } from "@/components/RequiresConvex";
 import Link from "next/link";
 
 const MODE_MAP = {
@@ -37,10 +37,6 @@ function CreateForm() {
     e.preventDefault();
     if (!name.trim()) {
       setError("Enter your name");
-      return;
-    }
-    if (!isConvexConfigured()) {
-      setError("Convex is not configured. Add NEXT_PUBLIC_CONVEX_URL to deploy.");
       return;
     }
     setLoading(true);
@@ -109,7 +105,9 @@ function CreateForm() {
 export default function CreatePage() {
   return (
     <Suspense fallback={<main className="container">Loading…</main>}>
-      <CreateForm />
+      <RequiresConvex>
+        <CreateForm />
+      </RequiresConvex>
     </Suspense>
   );
 }

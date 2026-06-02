@@ -7,7 +7,7 @@ import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import Link from "next/link";
 import { appPath } from "@/lib/paths";
-import { isConvexConfigured } from "@/lib/convex";
+import { RequiresConvex } from "@/components/RequiresConvex";
 
 function FinalView() {
   const searchParams = useSearchParams();
@@ -101,7 +101,9 @@ function FinalView() {
 export default function FinalPage() {
   return (
     <Suspense fallback={<main className="container">Loading…</main>}>
-      <FinalView />
+      <RequiresConvex>
+        <FinalView />
+      </RequiresConvex>
     </Suspense>
   );
 }

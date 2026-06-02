@@ -10,6 +10,7 @@ import { appPath, absoluteAppUrl } from "@/lib/paths";
 import Link from "next/link";
 import { ConvexBanner } from "@/components/ConvexBanner";
 import { RecommendationCard } from "@/components/RecommendationCard";
+import { RequiresConvex } from "@/components/RequiresConvex";
 import { isConvexConfigured } from "@/lib/convex";
 
 const PRESETS = [
@@ -139,15 +140,6 @@ function PlanView() {
     } finally {
       setBusy(false);
     }
-  }
-
-  if (!isConvexConfigured()) {
-    return (
-      <main className="container">
-        <ConvexBanner />
-        <p className="muted">Connect Convex to use live planning.</p>
-      </main>
-    );
   }
 
   if (!planId) {
@@ -298,7 +290,9 @@ function PlanView() {
 export default function PlanPage() {
   return (
     <Suspense fallback={<main className="container">Loading…</main>}>
-      <PlanView />
+      <RequiresConvex>
+        <PlanView />
+      </RequiresConvex>
     </Suspense>
   );
 }
