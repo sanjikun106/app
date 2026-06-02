@@ -15,7 +15,7 @@ function FinalView() {
 
   const finalPlan = useQuery(
     api.domain.recommendations.getFinalPlan,
-    planId && isConvexConfigured() ? { planId } : "skip",
+    planId ? { planId } : "skip",
   );
 
   if (!planId) {

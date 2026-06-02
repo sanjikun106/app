@@ -11,7 +11,6 @@ import Link from "next/link";
 import { ConvexBanner } from "@/components/ConvexBanner";
 import { RecommendationCard } from "@/components/RecommendationCard";
 import { RequiresConvex } from "@/components/RequiresConvex";
-import { isConvexConfigured } from "@/lib/convex";
 
 const PRESETS = [
   "balanced",
@@ -39,19 +38,17 @@ function PlanView() {
 
   const planData = useQuery(
     api.domain.plans.getById,
-    planId && isConvexConfigured() ? { planId, guestId } : "skip",
+    planId ? { planId, guestId } : "skip",
   );
 
   const recommendations = useQuery(
     api.domain.recommendations.listByPlan,
-    planId && planData?.plan.status !== "collecting" && isConvexConfigured()
-      ? { planId }
-      : "skip",
+    planId && planData?.plan.status !== "collecting" ? { planId } : "skip",
   );
 
   const voteSummary = useQuery(
     api.domain.votes.summary,
-    planId && isConvexConfigured() ? { planId } : "skip",
+    planId ? { planId } : "skip",
   );
 
   const setOrigin = useMutation(api.domain.participants.setOrigin);
