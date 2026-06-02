@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { getGuestId } from "@/lib/guest";
-import { href } from "@/lib/paths";
+import { appPath } from "@/lib/paths";
 import { ConvexBanner } from "@/components/ConvexBanner";
 import { isConvexConfigured } from "@/lib/convex";
 import Link from "next/link";
@@ -58,9 +58,7 @@ function CreateForm() {
         preset: "balanced",
       });
       router.push(
-        href(
-          `/plan/?id=${result.planId}&token=${result.inviteToken}`,
-        ),
+        appPath(`/plan/?id=${result.planId}&token=${result.inviteToken}`),
       );
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create plan");
@@ -71,7 +69,7 @@ function CreateForm() {
 
   return (
     <main className="container">
-      <Link href={href("/")} className="muted">
+      <Link href={appPath("/")} className="muted">
         ← Back
       </Link>
       <h1 style={{ margin: "1rem 0 0.5rem", fontSize: "1.5rem" }}>

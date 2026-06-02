@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { href } from "@/lib/paths";
+import { appPath } from "@/lib/paths";
 
 export default function HomePage() {
   return (
@@ -16,19 +16,19 @@ export default function HomePage() {
       </header>
 
       <section className="grid-modes">
-        <Link className="mode-card" href={href("/create/?mode=movie")}>
+        <Link className="mode-card" href={appPath("/create/?mode=movie")}>
           <h3>Watch a movie</h3>
           <p className="muted">Theatres, showtimes, Rapido → Metro → walk</p>
         </Link>
-        <Link className="mode-card" href={href("/create/?mode=dine")}>
+        <Link className="mode-card" href={appPath("/create/?mode=dine")}>
           <h3>Eat or hang out</h3>
           <p className="muted">Cafés & restaurants ranked for the group</p>
         </Link>
-        <Link className="mode-card" href={href("/create/?mode=meet")}>
+        <Link className="mode-card" href={appPath("/create/?mode=meet")}>
           <h3>Meet somewhere</h3>
           <p className="muted">General meetup with fairness presets</p>
         </Link>
-        <Link className="mode-card" href={href("/create/?mode=shared_dest")}>
+        <Link className="mode-card" href={appPath("/create/?mode=shared_dest")}>
           <h3>Travel together</h3>
           <p className="muted">En-route rendezvous to a shared destination</p>
         </Link>

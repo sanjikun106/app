@@ -1,7 +1,5 @@
 "use client";
 
-import { href } from "@/lib/paths";
-
 type Route = {
   displayName: string;
   totalDurationSec: number;

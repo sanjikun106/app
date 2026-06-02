@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { getGuestId } from "@/lib/guest";
-import { href } from "@/lib/paths";
+import { appPath } from "@/lib/paths";
 import Link from "next/link";
 import { ConvexBanner } from "@/components/ConvexBanner";
 import { isConvexConfigured } from "@/lib/convex";
@@ -37,7 +37,7 @@ function JoinForm() {
         displayName: name.trim(),
         guestId,
       });
-      router.push(href(`/plan/?id=${result.planId}&token=${token}`));
+      router.push(appPath(`/plan/?id=${result.planId}&token=${token}`));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Join failed");
     } finally {

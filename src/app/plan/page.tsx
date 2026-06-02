@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { getGuestId } from "@/lib/guest";
-import { href } from "@/lib/paths";
+import { appPath, absoluteAppUrl } from "@/lib/paths";
 import Link from "next/link";
 import { ConvexBanner } from "@/components/ConvexBanner";
 import { RecommendationCard } from "@/components/RecommendationCard";
@@ -67,7 +67,7 @@ function PlanView() {
 
   const inviteUrl = useMemo(() => {
     if (typeof window === "undefined" || !inviteToken) return "";
-    return `${window.location.origin}${href(`/join/?token=${inviteToken}`)}`;
+    return absoluteAppUrl(`/join/?token=${inviteToken}`);
   }, [inviteToken]);
 
   const voteCounts = useMemo(() => {
@@ -135,7 +135,7 @@ function PlanView() {
     setBusy(true);
     try {
       await lockPlan({ planId, recommendationId: recId, guestId });
-      router.push(href(`/final/?id=${planId}`));
+      router.push(appPath(`/final/?id=${planId}`));
     } finally {
       setBusy(false);
     }
@@ -169,13 +169,13 @@ function PlanView() {
   const { plan, participants } = planData;
 
   if (plan.status === "locked") {
-    router.replace(href(`/final/?id=${planId}`));
+    router.replace(appPath(`/final/?id=${planId}`));
     return null;
   }
 
   return (
     <main className="container">
-      <Link href={href("/")} className="muted">
+      <Link href={appPath("/")} className="muted">
         ← Home
       </Link>
       <h1 style={{ margin: "1rem 0 0.25rem" }}>

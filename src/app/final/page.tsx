@@ -6,7 +6,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import Link from "next/link";
-import { href } from "@/lib/paths";
+import { appPath } from "@/lib/paths";
 import { isConvexConfigured } from "@/lib/convex";
 
 function FinalView() {
@@ -34,7 +34,7 @@ function FinalView() {
     return (
       <main className="container">
         <p>No locked plan yet.</p>
-        <Link href={href(`/plan/?id=${planId}`)}>Back to plan</Link>
+        <Link href={appPath(`/plan/?id=${planId}`)}>Back to plan</Link>
       </main>
     );
   }
@@ -91,7 +91,7 @@ function FinalView() {
         Share this card in your group chat. MeetRoute compared travel burden and
         locked the fairest practical option.
       </p>
-      <Link href={href("/")} className="btn btn-ghost" style={{ marginTop: "1rem" }}>
+      <Link href={appPath("/")} className="btn btn-ghost" style={{ marginTop: "1rem" }}>
         Start another plan
       </Link>
     </main>
