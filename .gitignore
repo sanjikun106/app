@@ -1,0 +1,30 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# build
+.next
+out
+dist
+
+# convex
+.convex
+
+# env
+.env
+.env.local
+.env*.local
+
+# debug
+npm-debug.log*
+.DS_Store
+*.pem
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# ide
+.idea
+.vscode
